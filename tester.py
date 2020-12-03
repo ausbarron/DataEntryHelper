@@ -6,6 +6,8 @@ def writer_to_file(arg):
     for item in writer_list: 
         f.write("%s," % item)
     f.write("\n")
+
+##function that checks whether the user entered the correct input for file opening
 def file_checker(fName, switch):
     checker = False
     if(switch == "1"):
@@ -19,6 +21,7 @@ def file_checker(fName, switch):
         switch2 = input()
         file_checker(fName, switch2)
     return file
+
 ##Main Method
 def main():
     print("Would you like to enter data to a new file(1) or an existing file(2)")
@@ -26,27 +29,19 @@ def main():
     print("Enter a file name for writing")
     fileName = input()
 
-    checker = False
-    while(checker == False):
-        if(switcher == "1"):
-            file = open(fileName, "w")
-            checker = True
-        elif(switcher == "2"):
-            file = open(fileName, "a")
-            checker = True
-        else:
-            print("Enter a valid input")
+    checkedFile = file_checker(fileName, switcher)
             
-
     print("How many fields for data?")
     fields = input()
     fieldNum = int(fields)
     fields_list = []
     for i in fields_list:
+        
         print("Enter Field Name:")
         field_name = input()
         fields_list.append(field_name)
-        if(switcher == "1"):
+        
+        if(switcher == "1"):  
             file.write(field_name)
             file.write(",")
 
@@ -54,11 +49,15 @@ def main():
     print("Enter Q for any value to quit")
     for i in fields_list:
         if(i < fieldNum):
+            
             print("Enter the " + fields_list[i] + " followed by a comma.")
             information_list.append(input())
+            
             if(information_list[i] == 'q' or information_list[i] == 'Q'):
                 break
+            
             writer_to_file(information_list)
+            
         else:
             print("Enter the " + fields_list[i])
             information_list.append(input())
